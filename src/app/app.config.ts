@@ -6,7 +6,6 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@a
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),
-        { provide: HTTP_INTERCEPTORS },
         provideHttpClient(withInterceptorsFromDi())
     ]
 }
