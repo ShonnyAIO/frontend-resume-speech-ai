@@ -1,1 +1,49 @@
-<p>Esta es la pagina principal</p>
+<section class="bg-white dark:bg-gray-900">
+    <div class="py-4 lg:py-8 px-4 mx-auto max-w-screen-2xl">
+        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Speech To Text
+            with Resume (Spanish)
+        </h2>
+        <p class="mb-2 lg:mb-4 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Esta aplicación hace
+            que podemos obtener el dialogo del video en castellano y con el apoyo de la Inteligencia Artificial poder
+            resumirla
+            de manera precisa</p>
+        <p class="mb-2 lg:mb-4 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Esto se utilizara
+            únicamente para la de Organizacion y Estructura del Computador II</p>
+        <form [formGroup]="formsApi" (ngSubmit)="generateSpeech()" class="space-y-8" *ngIf="!sendForm else loader">
+            <div>
+                <label for="url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Enlace del
+                    video</label>
+                <input type="text" formControlName="url" id="url"
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                    placeholder="https://www.youtube.com/watch?v=VJ6tuX5bBf4&list=PL0j-r-omG7i0-mnsxN5T4UcVS1Di0isqf"
+                    required>
+            </div>
+            <button type="submit"
+                class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Hacer
+                el resumen</button>
+        </form>
+        <div class="flex flex-row">
+            <div class="block ml-4 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 mt-4"
+                *ngFor="let dataResults of dataResults">
+                <div class="mb-4">
+                    <iframe width="325" height="250" [src]="getVideo(dataResults.url)"> </iframe>
+                </div>
+                <div class="flex flex-row justify-center mt-2">
+                    <a [href]="fileUrl" (click)="downloadFile(dataResults.guion)" download="dialogo.txt"
+                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        Dialogo
+                    </a>
+                    <a [href]="fileUrl" (click)="downloadFile(dataResults.respuesta)" download="resumen.txt"
+                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        Resumen
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-template #loader>
+    <img class="text-center" src="../../../assets/image/ucv-logo.svg" alt="Logo UCV" />
+    Cargando ...
+</ng-template>
