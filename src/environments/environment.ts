@@ -1,3 +1,3 @@
 export const environment = {
-    apiUrl : 'http://127.0.0.1:5000'
+    apiUrl : 'https://backend-speech-ai.jonathantorres6.repl.co'
 };

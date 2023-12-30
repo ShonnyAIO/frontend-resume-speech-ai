@@ -69,7 +69,6 @@ export class HomeComponent implements OnInit {
   }
 
   getVideo(url: string) {
-    console.log(url);
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
